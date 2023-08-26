@@ -1,5 +1,5 @@
 ---
 - name: AWX Deploy VM OS Host
-  hosts: esx
+  hosts: esxgroup
   connection: local
   gather_facts: yes
