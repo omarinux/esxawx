@@ -38,7 +38,7 @@
       username: '{{ vcenter_username }}'
       password: '{{ vcenter_password }}'
       datacenter_name: dc1
-      folder_name: web
+      folder_name: dc
       folder_type: vm
       state: present
       validate_certs: no
@@ -52,7 +52,7 @@
       username: '{{ vcenter_username }}'
       password: '{{ vcenter_password }}'
       datacenter_name: dc1
-      folder_name: web
+      folder_name: backup
       folder_type: vm
       state: present
       validate_certs: no
