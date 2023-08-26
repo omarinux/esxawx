@@ -2,7 +2,7 @@
 - name: AWX Deploy VM OS Host
   hosts: localhost
   connection: local
-  gather_facts: no
+  gather_facts: yes
   tasks:
 
     - name: Create a virtual machine from a template
