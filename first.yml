@@ -7,7 +7,7 @@
 
     - name: Create a virtual machine from a template
       vmware_guest:
-        hostname: "{{ esx }}"
+        hostname: "{{ vcsa_hostname }}"
         username: user@user.domain
         esxi_hostname: "{{ esxi_hostname }}"
         password: "{{ pwd }}"
