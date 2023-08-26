@@ -1,6 +1,6 @@
 ---
 - name: AWX Deploy VM OS Host
-  hosts: localhost
+  hosts: esx
   connection: local
   gather_facts: no
   tasks:
