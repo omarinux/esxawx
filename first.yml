@@ -30,4 +30,4 @@
       validate_certs: no
     register: vm_folder_web_creation_result
     delegate_to: localhost
-    when: web in "{{ category }}"
+    when: web in "{ %category% }"
