@@ -14,5 +14,6 @@
       folder_name: sample_vm_folder
       folder_type: vm
       state: present
+      validate_certs: no
     register: vm_folder_creation_result
     delegate_to: localhost
