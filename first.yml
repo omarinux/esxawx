@@ -39,7 +39,7 @@
       esxifacts: "{{ esxis.ansible_facts }}"
 
   - set_fact: 
-      memoryrequest: "10"
+      memoryrequest: "800"
 
   - set_fact: 
       datastore: "{{ ds_size_list + [item.freeSpace] }}"
@@ -48,6 +48,13 @@
 
   - debug:
       var: datastore
+
+  - name: solution set_fact
+      set_fact:
+        result: "{{ result | datastore - memoryrequest }}"
+
+  - debug:
+      var: result
 
   - debug:
       var: esxifacts.ansible_datastore
