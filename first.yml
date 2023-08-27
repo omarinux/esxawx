@@ -51,7 +51,7 @@
 #    failed_when: datastore|int < 536870912000
 
   - fail: msg="No free space on DS"
-    when: datastore|float < memoryrequest
+    when: "{{ (datastore|int < memoryrequest|int }}"
     #datastore|int < 536870912000
 
   - debug:
