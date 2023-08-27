@@ -72,7 +72,7 @@
     register: vm_folder_creation_result
     delegate_to: localhost
     ignore_errors: true
-    when: when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50" and 
+    when: when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50"
 
     # ok calcolo
     # when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50"
