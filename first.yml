@@ -16,7 +16,7 @@
       username: "{{ vcsazurigo_username }}"
       password: "{{ vcsazurigo_password }}"
       datacenter_name: dc1
-      folder_name: sample_vm_folder2
+      folder_name: "{{ projectname }}" 
       folder_type: vm
       state: present
       validate_certs: no
