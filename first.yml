@@ -8,7 +8,7 @@
   - name: Get environment
     debug:
       msg: usernamevcsazurigo
-    ignore_erros: true
+    ignore_errors: true
 
   - name: Create a VM folder on given datacenter
     community.vmware.vcenter_folder:
