@@ -50,8 +50,9 @@
       - "{{ info.datastores }}"
 #    failed_when: datastore|int < 536870912000
 
-  #- fail: msg="No free space on DS"
-  #  when: datastore|int < 536870912000
+  - fail: msg="No free space on DS"
+    when: datastore|int is lt memoryrequest
+    #datastore|int < 536870912000
 
   - debug:
       var: datastore
