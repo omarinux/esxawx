@@ -59,12 +59,12 @@
   - debug:
       var: datastore
 
-  - set_fact:
-      result2: "{{ (total|memoryrequest - item|int ) }}"
-    loop: "{{ datastore }}"
+  #- set_fact:
+  #    result2: "{{ (total|memoryrequest - item|int ) }}"
+  #  loop: "{{ datastore }}"
 
-  - debug:
-      var: result2
+  #- debug:
+  #    var: result2
 
   - debug:
       var: esxifacts.ansible_datastore
