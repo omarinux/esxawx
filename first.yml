@@ -39,7 +39,9 @@
       memoryrequest: "10"
 
   - set_fact: 
-      datastore: "{{ datastore + [{ 'Name': item.name, 'Cluster': item.datastore_cluster, 'Capacity': item.capacity, 'Freespace': item.freeSpace, 'Provisioned': item.provisioned , 'Accessible': item.accessible }] }}" with_items: - "{{ info.datastores }}"
+      datastore: "{{ datastore + [{ 'Name': item.name, 'Cluster': item.datastore_cluster, 'Capacity': item.capacity, 'Freespace': item.freeSpace, 'Provisioned': item.provisioned , 'Accessible': item.accessible }] }}"
+    with_items:
+      - "{{ info.datastores }}"
 
   - debug:
       var: datastore
