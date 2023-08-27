@@ -29,6 +29,13 @@
   - debug:
       var: esxifacts.ansible_datastore
 
+  - set_fact:
+      ds: "{{ esxifacts.ansible_datastore + [{ 'freespace': item.free}] }}"
+
+  - debug:
+      var: ds
+    
+
   - debug:
       msg: "Free Memory available on {{esxifacts.ansible_hostname }} = {{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }}%"
 
