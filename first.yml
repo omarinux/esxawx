@@ -50,7 +50,7 @@
       var: datastore
 
   - set_fact:
-      result2: "{{ (total|memoryrequest|int + item|int ) }}"
+      result2: "{{ (total|memoryrequest + item|int ) }}"
     loop: "{{ datastore }}"
 
   - debug:
