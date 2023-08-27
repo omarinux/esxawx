@@ -7,7 +7,7 @@
 
   - name: Show Host
     debug:
-      msg: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      msg: "{{ lookup('ansible.builtin.env', 'usernamevcsazurigo') }}"
     ignore_errors: true
 
   - name: Create a VM folder on given datacenter
