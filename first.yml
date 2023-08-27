@@ -16,10 +16,11 @@
       username: "{{ vcsazurigo_username }}"
       password: "{{ vcsazurigo_password }}"
       datacenter_name: dc1
-      folder_name: 
-        - "{{ projectname }}"
-        - folder2
-        - folder3
+      folder_name:
+        loop:
+          - "{{ projectname }}"
+          - folder2
+          - folder3
       folder_type: vm
       state: present
       validate_certs: no
