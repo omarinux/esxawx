@@ -47,7 +47,7 @@
       - "{{ info.datastores }}"
 
   - debug:
-      var: datastore
+      var: datastore.Freespace
 
   - debug:
       var: esxifacts.ansible_datastore
