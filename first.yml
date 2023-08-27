@@ -49,6 +49,10 @@
     with_items:
       - "{{ info.datastores }}"
     failed_when: datastore|int < 536870912000
+    rescue:
+  - name: Print custom message before failing the host
+    fail:
+      msg: "Datastore not have free space"
 
   - debug:
       var: datastore
