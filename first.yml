@@ -49,12 +49,13 @@
   - debug:
       var: datastore
 
-  - set_fact:
-      result: "{{ result | default([]) + [ { memoryrequest } ] }}"
-    loop: "{{ datastore }}"
+ - set_fact:
+      result2: "{{ [ { used } ] }}"
+   vars:
+     used: "{{ (item.datastore  - memoryrequest ) | float }}"
 
   - debug:
-      var: result
+      var: result2
 
   - debug:
       var: esxifacts.ansible_datastore
