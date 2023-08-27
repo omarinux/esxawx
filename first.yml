@@ -49,7 +49,7 @@
     register: vm_folder_creation_result
     delegate_to: localhost
     ignore_errors: true
-    when: {% if esxifacts.ansible_datastore.free - memoryrequest => 50 %}
+    when: "{{ esxifacts.ansible_datastore.free - memoryrequest => 50 }}"
 
 #  - name: Create a VM web on given datacenter
 #    community.vmware.vcenter_folder:
