@@ -7,22 +7,23 @@
 
   - name: Show Host
     debug:
-      msg: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+      msg: '{{ lookup("env", "VMWARE_PASSWORD") }}' and '{{ lookup("env", "VMWARE_HOST") }}' and '{{ lookup("env", "usernamevcsazurigo") }}'
     ignore_errors: true
 
-#  - name: Create a VM folder on given datacenter
-#    community.vmware.vcenter_folder:
-#      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
-#      username: "{{ lookup('ansible.builtin.env', 'usernamevcsazurigo') }}"
-#      password: "{{ lookup('ansible.builtin.env', 'passwordvcsazurigo') }}"
-#      datacenter_name: dc1
-#      folder_name: sample_vm_folder2
-#      folder_type: vm
-#      state: present
-#      validate_certs: no
-#    register: vm_folder_creation_result
-#    delegate_to: localhost
-#
+  - name: Create a VM folder on given datacenter
+    community.vmware.vcenter_folder:
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      username: "{{ lookup('ansible.builtin.env', 'usernamevcsazurigo') }}"
+      password: "{{ lookup('ansible.builtin.env', 'passwordvcsazurigo') }}"
+      datacenter_name: dc1
+      folder_name: sample_vm_folder2
+      folder_type: vm
+      state: present
+      validate_certs: no
+    register: vm_folder_creation_result
+    delegate_to: localhost
+    ignore_errors: true
+
 #  - name: Create a VM web on given datacenter
 #    community.vmware.vcenter_folder:
 #      hostname: '{{ vcsa_hostname }}'
