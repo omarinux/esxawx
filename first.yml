@@ -41,6 +41,9 @@
   - set_fact: 
       memoryrequest: "800"
 
+  - debug:
+      var: memoryrequest
+
   - set_fact: 
       datastore: "{{ ds_size_list + [item.freeSpace] }}"
     with_items:
