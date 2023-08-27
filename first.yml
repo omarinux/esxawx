@@ -10,6 +10,24 @@
       msg: "{{ vcsazurigo_username }}"
     ignore_errors: true
 
+  - name: Gather cluster info from given datacenter
+    vmware_host_facts:
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      username: "{{ vcsazurigo_username }}"
+      password: "{{ vcsazurigo_password }}"
+      validate_certs: False
+    delegate_to: localhost
+    register: esxis
+
+  - set_fact: 
+      esxifacts: "{{ esxis.ansible_facts }}"
+
+  - debug:
+      var: esxifacts.ansible_datastore
+
+  - debug:
+      msg: "Free Memory available on {{esxifacts.ansible_hostname }} = {{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }}%"
+
   - name: Create a VM folder on given datacenter
     community.vmware.vcenter_folder:
       hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
