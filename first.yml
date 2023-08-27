@@ -50,8 +50,9 @@
       var: datastore
 
   - name: solution set_fact
-      set_fact:
-        result: "{{ result | datastore - memoryrequest }}"
+  - set_fact:
+      result: "{{ result | default([]) - memoryrequest }}"
+    loop: "{{ datastore }}"
 
   - debug:
       var: result
