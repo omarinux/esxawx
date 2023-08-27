@@ -52,7 +52,7 @@
  - set_fact:
       result2: "{{ [ { used } ] }}"
    vars:
-     used: "{{ (item.datastore  - memoryrequest ) | float }}"
+     used: "{{ (item.datastore / memoryrequest ) | float }}"
 
   - debug:
       var: result2
