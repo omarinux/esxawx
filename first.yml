@@ -7,7 +7,7 @@
 
   - name: Show Host
     debug:
-      var: usernamevcsazurigo
+      msg: "{{ usernamevcsazurigo }}"
     ignore_errors: true
 
 #  - name: Create a VM folder on given datacenter
