@@ -49,7 +49,7 @@
   - debug:
       var: datastore
 
- - set_fact:
+  - set_fact:
       result2: "{{ (item.datastore / memoryrequest ) | float }}"
 
   - debug:
