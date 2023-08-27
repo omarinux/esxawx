@@ -12,9 +12,10 @@
 
   - name: Gather cluster info from given datacenter
     vmware_host_facts:
-      hostname: 192.168.21.200
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
       username: "{{ vcsazurigo_username }}"
       password: "{{ vcsazurigo_password }}"
+      esxi_hostname: 192.168.21.200
       validate_certs: False
     delegate_to: localhost
     register: esxis
