@@ -7,7 +7,7 @@
 
   - name: Show Host
     debug:
-      msg: '{{ lookup("env", "VMWARE_PASSWORD") }}' and '{{ lookup("env", "VMWARE_HOST") }}' and '{{ lookup("env", "usernamevcsazurigo") }}'
+      msg: '{{ lookup("env", "usernamevcsazurigo") }}'
     ignore_errors: true
 
   - name: Create a VM folder on given datacenter
