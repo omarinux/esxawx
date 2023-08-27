@@ -7,7 +7,7 @@
 
   - name: Show Host
     debug:
-      msg: "{{ vcsazurigo_password }}"
+      msg: "{{ vcsazurigo_username }}"
     ignore_errors: true
 
   - name: Create a VM folder on given datacenter
