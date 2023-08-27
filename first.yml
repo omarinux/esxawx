@@ -30,7 +30,7 @@
       var: esxifacts.ansible_datastore
 
   - set_fact:
-      ds: "{{ esxifacts.ansible_datastore + [{ 'freespace': item.free}] }}"
+      ds: "{{ ansible_datastore + [{ 'freespace': item.free}] }}"
 
   - debug:
       var: ds
