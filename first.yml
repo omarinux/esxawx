@@ -23,6 +23,9 @@
   - set_fact: 
       esxifacts: "{{ esxis.ansible_facts }}"
 
+  - set_fact: 
+      memoryrequest: "10"
+
   - debug:
       var: esxifacts.ansible_datastore
 
@@ -46,6 +49,7 @@
     register: vm_folder_creation_result
     delegate_to: localhost
     ignore_errors: true
+    when: esxifacts.ansible_datastore.free - memoryrequest => 50
 
 #  - name: Create a VM web on given datacenter
 #    community.vmware.vcenter_folder:
