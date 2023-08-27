@@ -20,26 +20,38 @@
     delegate_to: localhost
     register: esxis
 
+  - name: Collect info regarding datastore 
+    vmware_datastore_info: 
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      username: "{{ vcsazurigo_username }}"
+      password: "{{ vcsazurigo_password }}"
+      datacenter_name: '{{ datacenter_name }}' 
+      validate_certs: false 
+    delegate_to: localhost 
+    register: info 
+
+  - debug: var=info.datastores
+
   - set_fact: 
       esxifacts: "{{ esxis.ansible_facts }}"
 
   - set_fact: 
       memoryrequest: "10"
 
+  - set_fact: 
+      datastore: "{{ datastore + [{ 'Name': item.name, 'Cluster': item.datastore_cluster, 'Capacity': item.capacity, 'Freespace': item.freeSpace, 'Provisioned': item.provisioned , 'Accessible': item.accessible }] }}" with_items: - "{{ info.datastores }}"
+
+  - debug:
+      var: datastore
+
   - debug:
       var: esxifacts.ansible_datastore
-
-  - set_fact:
-      ds: "{{ ansible_datastore + [{ 'freespace': item.free}] }}"
-      with_items:
-        - "{{ esxis }}"
-
-  - debug:
-      var: ds
     
 
   - debug:
       msg: "Free Memory available on {{esxifacts.ansible_hostname }} = {{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }}%"
+
+
 
   - name: Create a VM folder on given datacenter
     community.vmware.vcenter_folder:
@@ -58,7 +70,7 @@
     register: vm_folder_creation_result
     delegate_to: localhost
     ignore_errors: true
-    when: "{{ ansible_datastore.free - memoryrequest }} | int > 50"
+    when: when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50" and 
 
     # ok calcolo
     # when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50"
