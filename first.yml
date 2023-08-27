@@ -42,7 +42,7 @@
       memoryrequest: "90"
 
   - set_fact:
-      memorytotalrequest: "{{ (100 * memoryrequest) }}"
+      memorytotalrequest: "{{ 100 * memoryrequest }}"
 
   - debug:
       var: memorytotalrequest
