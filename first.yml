@@ -49,7 +49,6 @@
   - debug:
       var: datastore
 
-  - name: solution set_fact
   - set_fact:
       result: "{{ result | default([]) - memoryrequest }}"
     loop: "{{ datastore }}"
