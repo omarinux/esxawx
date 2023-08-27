@@ -7,7 +7,7 @@
 
   - name: Create a VM folder on given datacenter
     community.vmware.vcenter_folder:
-      hostname: '{{ vcsa_hostname }}'
+      #hostname: '{{ vcsa_hostname }}'
       username: usernamevcsazurigo
       password: passwordvcsazurigo
       datacenter_name: dc1
