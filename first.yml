@@ -7,7 +7,8 @@
 
   - name: Get environment
     debug:
-      msg: "{{ usernamevcsazurigo }}"
+      msg: usernamevcsazurigo
+    ignore_erros: true
 
   - name: Create a VM folder on given datacenter
     community.vmware.vcenter_folder:
