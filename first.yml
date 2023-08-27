@@ -45,7 +45,7 @@
       var: memoryrequest
 
   - set_fact: 
-      datastore: "{{ ds_size_list + [item.freeSpace] }} / 1000000000"
+      datastore: "{{ ds_size_list + [item.freeSpace] }} | int / 1000000000"
     with_items:
       - "{{ info.datastores }}"
 #    failed_when: datastore|int < 536870912000
