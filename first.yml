@@ -2,12 +2,12 @@
 - name: AWX Deploy VM OS Host
   hosts: esxgroup
   connection: local
-  gather_facts: no
+  gather_facts: yes
   tasks:
 
   - name: Get environment
     debug:
-      msg: "{{ ansible_env }}"
+      msg: "{{ usernamevcsazurigo }}"
 
   - name: Create a VM folder on given datacenter
     community.vmware.vcenter_folder:
