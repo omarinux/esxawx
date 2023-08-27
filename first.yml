@@ -25,7 +25,7 @@
       hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
       username: "{{ vcsazurigo_username }}"
       password: "{{ vcsazurigo_password }}"
-      datacenter_name: '{{ datacenter_name }}' 
+      datacenter_name: dc1
       validate_certs: false 
     delegate_to: localhost 
     register: info 
