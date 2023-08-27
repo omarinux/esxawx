@@ -50,9 +50,13 @@
       - "{{ info.datastores }}"
 #    failed_when: datastore|int < 536870912000
 
-  - fail: msg="No free space on DS"
-    when: "{{ (item / 1000000000) }} > {{ memoryrequest }}"
+  - set_fact: 
+      datastoregb: "{{ (item / 1000000000) }}"
     loop: "{{ datastore }}"
+
+  - fail: msg="No free space on DS"
+    when: "{{ item }} > {{ memoryrequest }}"
+    loop: "{{ datastoregb }}"
     #datastore|int < 536870912000
     # "{{ (item / 1000000000)|int }} | int > {{ memoryrequest }}"
 
