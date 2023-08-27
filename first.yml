@@ -7,60 +7,60 @@
 
   - name: Show Host
     debug:
-      msg: "{{ lookup('ansible.builtin.env', 'ESXI_USERNAME') }}"
+      msg: "{{ lookup('ansible.builtin.env', 'VMWARE_USER') }}"
     ignore_errors: true
 
-  - name: Create a VM folder on given datacenter
-    community.vmware.vcenter_folder:
-      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
-      username: "{{ lookup('ansible.builtin.env', 'usernamevcsazurigo') }}"
-      password: "{{ lookup('ansible.builtin.env', 'passwordvcsazurigo') }}"
-      datacenter_name: dc1
-      folder_name: sample_vm_folder2
-      folder_type: vm
-      state: present
-      validate_certs: no
-    register: vm_folder_creation_result
-    delegate_to: localhost
-
-  - name: Create a VM web on given datacenter
-    community.vmware.vcenter_folder:
-      hostname: '{{ vcsa_hostname }}'
-      username: '{{ vcenter_username }}'
-      password: '{{ vcenter_password }}'
-      datacenter_name: dc1
-      folder_name: web
-      folder_type: vm
-      state: present
-      validate_certs: no
-    register: vm_folder_web_creation_result
-    delegate_to: localhost
-    when: category is search("web")
-
-  - name: Create a VM dc on given datacenter
-    community.vmware.vcenter_folder:
-      hostname: '{{ vcsa_hostname }}'
-      username: '{{ vcenter_username }}'
-      password: '{{ vcenter_password }}'
-      datacenter_name: dc1
-      folder_name: dc
-      folder_type: vm
-      state: present
-      validate_certs: no
-    register: vm_folder_web_creation_result
-    delegate_to: localhost
-    when: category is search("dc")
-
-  - name: Create a VM backup on given datacenter
-    community.vmware.vcenter_folder:
-      hostname: '{{ vcsa_hostname }}'
-      username: '{{ vcenter_username }}'
-      password: '{{ vcenter_password }}'
-      datacenter_name: dc1
-      folder_name: backup
-      folder_type: vm
-      state: present
-      validate_certs: no
-    register: vm_folder_web_creation_result
-    delegate_to: localhost
-    when: category is search("backup")
+#  - name: Create a VM folder on given datacenter
+#    community.vmware.vcenter_folder:
+#      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+#      username: "{{ lookup('ansible.builtin.env', 'usernamevcsazurigo') }}"
+#      password: "{{ lookup('ansible.builtin.env', 'passwordvcsazurigo') }}"
+#      datacenter_name: dc1
+#      folder_name: sample_vm_folder2
+#      folder_type: vm
+#      state: present
+#      validate_certs: no
+#    register: vm_folder_creation_result
+#    delegate_to: localhost
+#
+#  - name: Create a VM web on given datacenter
+#    community.vmware.vcenter_folder:
+#      hostname: '{{ vcsa_hostname }}'
+#      username: '{{ vcenter_username }}'
+#      password: '{{ vcenter_password }}'
+#      datacenter_name: dc1
+#      folder_name: web
+#      folder_type: vm
+#      state: present
+#      validate_certs: no
+#    register: vm_folder_web_creation_result
+#    delegate_to: localhost
+#    when: category is search("web")
+#
+#  - name: Create a VM dc on given datacenter
+#    community.vmware.vcenter_folder:
+#      hostname: '{{ vcsa_hostname }}'
+#      username: '{{ vcenter_username }}'
+#      password: '{{ vcenter_password }}'
+#      datacenter_name: dc1
+#      folder_name: dc
+#      folder_type: vm
+#      state: present
+#      validate_certs: no
+#    register: vm_folder_web_creation_result
+#    delegate_to: localhost
+#    when: category is search("dc")
+#
+#  - name: Create a VM backup on given datacenter
+#    community.vmware.vcenter_folder:
+#      hostname: '{{ vcsa_hostname }}'
+#      username: '{{ vcenter_username }}'
+#      password: '{{ vcenter_password }}'
+#      datacenter_name: dc1
+#      folder_name: backup
+#      folder_type: vm
+#      state: present
+#      validate_certs: no
+#    register: vm_folder_web_creation_result
+#    delegate_to: localhost
+#    when: category is search("backup")
