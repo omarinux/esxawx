@@ -55,6 +55,10 @@
       datastoregb: "{{ (item | int / 1000000000) }}"
     loop: "{{ datastore }}"
 
+  - name: Storage avaiable on DS GB
+    debug:  
+      var: "{{ datastoregb }}"
+  
   - fail: msg="No free space on DS"
     when: "{{ datastoregb }} < {{ memoryrequest }}"
     #datastore|int < 536870912000
