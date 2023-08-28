@@ -55,6 +55,13 @@
       - "{{ info.datastores }}"
 #    failed_when: datastore|int < 536870912000
 
+  - set_fact:    # find the value of the largest freeSpace entry in the ds_size_list list
+      max_ds: "{{ datastore | max }}"
+
+  - name: Storage max GB avail
+    debug:  
+      var: "{{ max_ds }}"
+
   - set_fact: 
       datastoregb: "{{ (item | int / 1000000000) }}"
     loop: "{{ datastore }}"
