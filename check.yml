@@ -59,12 +59,12 @@
   - name: Pick Storage max avail
     set_fact:    # find the value of the largest freeSpace entry in the ds_size_list list
       max_ds: "{{ ds_size_list | max }}"
-    when: storagetype == HDD
+    #when: storagetype == HDD
 
   - name: Convert DS Max Free to GB
     set_fact: 
       datastoregb: "{{ (max_ds | int / 1000000000) }}"
-    when: storagetype == HDD
+    #when: storagetype == HDD
 
 
   #- set_fact: 
@@ -76,6 +76,6 @@
   #    var: "{{ datastoregb }}"
 
   - fail: msg="No free space on DS HDD"
-    when: "({{ datastoregb }} < {{ memoryrequestgb }}) and (storagetype == HDD)"
+    when: {{ datastoregb }} < {{ memoryrequestgb }}
     #datastore|int < 536870912000
     # "{{ (item / 1000000000)|int }} | int > {{ memoryrequest }}"
