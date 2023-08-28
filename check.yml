@@ -60,7 +60,7 @@
       max_ds: "{{ ds_size_list | max }}"
 
   - name: Convert DS Max Free to GB
-  - set_fact: 
+    set_fact: 
       datastoregb: "{{ (max_ds | int / 1000000000) }}"
 
   - name: Debug Storage max GB avail
