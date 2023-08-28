@@ -1,0 +1,69 @@
+---
+- name: AWX Deploy VM OS Host
+  hosts: esxgroup
+  connection: local
+  gather_facts: yes
+  tasks:
+
+  - name: Show Host
+    debug:
+      msg: "{{ vcsazurigo_username }}"
+    ignore_errors: true
+
+  - name: Gather cluster info from given datacenter
+    vmware_host_facts:
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      username: "{{ vcsazurigo_username }}"
+      password: "{{ vcsazurigo_password }}"
+      esxi_hostname: 192.168.21.200
+      validate_certs: False
+    delegate_to: localhost
+    register: esxis
+
+  - name: Collect info regarding datastore 
+    vmware_datastore_info: 
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      username: "{{ vcsazurigo_username }}"
+      password: "{{ vcsazurigo_password }}"
+      datacenter_name: dc1
+      validate_certs: false 
+    delegate_to: localhost 
+    register: info
+
+  - set_fact:
+      ds_size_list: []
+
+  - debug: var=info.datastores
+
+  - set_fact: 
+      esxifacts: "{{ esxis.ansible_facts }}"
+
+  - set_fact: 
+      memoryrequest: "79000000000"
+
+  - name: Set Storage request in GB
+    set_fact: 
+      memoryrequestgb: "{{ memoryrequest | int / 1000000000 }}"
+
+  - name: Storage request GB
+    debug:  
+      var: "{{ memoryrequest | int / 1000000000 }}"
+
+  - set_fact: 
+      datastore: "{{ ds_size_list + [item.freeSpace] }}"
+    with_items:
+      - "{{ info.datastores }}"
+#    failed_when: datastore|int < 536870912000
+
+  - set_fact: 
+      datastoregb: "{{ (item | int / 1000000000) }}"
+    loop: "{{ datastore }}"
+
+  - name: Storage avaiable on DS GB
+    debug:  
+      var: "{{ datastoregb }}"
+  
+  - fail: msg="No free space on DS"
+    when: "{{ datastoregb }} < {{ memoryrequestgb }}"
+    #datastore|int < 536870912000
+    # "{{ (item / 1000000000)|int }} | int > {{ memoryrequest }}"
