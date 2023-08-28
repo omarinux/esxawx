@@ -76,6 +76,6 @@
   #    var: "{{ datastoregb }}"
 
   - fail: msg="No free space on DS HDD"
-    when: {{ datastoregb }} < {{ memoryrequestgb }}
+    when: "{{ datastoregb }} < {{ memoryrequestgb }}"
     #datastore|int < 536870912000
     # "{{ (item / 1000000000)|int }} | int > {{ memoryrequest }}"
