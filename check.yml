@@ -33,7 +33,7 @@
   - set_fact:
       ds_size_list: []
 
-  - debug: var=info.datastores
+  #- debug: var=info.datastores
 
   - set_fact: 
       esxifacts: "{{ esxis.ansible_facts }}"
