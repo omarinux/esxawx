@@ -63,9 +63,6 @@
     set_fact: 
       datastoregb: "{{ (max_ds | int / 1000000000) }}"
 
-  - name: Debug Storage max GB avail
-    debug:  
-      var: "{{ datastoregb }}"
 
   #- set_fact: 
   #    datastoregb: "{{ (item | int / 1000000000) }}"
