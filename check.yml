@@ -55,6 +55,12 @@
       - "{{ info.datastores }}"
 #    failed_when: datastore|int < 536870912000
 
+  - name: Array DS GB
+  - set_fact: 
+      datastoregb: "{{ (item | int / 1000000000) }}"
+    with_items: "{{ datastore }}"
+
+
   - set_fact: 
       datastoregb: "{{ (item | int / 1000000000) }}"
     loop: "{{ datastore }}"
