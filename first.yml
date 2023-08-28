@@ -109,9 +109,9 @@
 
   - name: Create a VM web on given datacenter
     community.vmware.vcenter_folder:
-      hostname: '{{ vcsa_hostname }}'
-      username: '{{ vcenter_username }}'
-      password: '{{ vcenter_password }}'
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      username: "{{ vcsazurigo_username }}"
+      password: "{{ vcsazurigo_password }}"
       datacenter_name: dc1
       folder_name: web
       folder_type: vm
@@ -123,9 +123,9 @@
 
   - name: Create a VM dc on given datacenter
     community.vmware.vcenter_folder:
-      hostname: '{{ vcsa_hostname }}'
-      username: '{{ vcenter_username }}'
-      password: '{{ vcenter_password }}'
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      username: "{{ vcsazurigo_username }}"
+      password: "{{ vcsazurigo_password }}"
       datacenter_name: dc1
       folder_name: dc
       folder_type: vm
@@ -137,9 +137,9 @@
 
   - name: Create a VM backup on given datacenter
     community.vmware.vcenter_folder:
-      hostname: '{{ vcsa_hostname }}'
-      username: '{{ vcenter_username }}'
-      password: '{{ vcenter_password }}'
+      hostname: "{{ lookup('ansible.builtin.env', 'VMWARE_HOST') }}"
+      username: "{{ vcsazurigo_username }}"
+      password: "{{ vcsazurigo_password }}"
       datacenter_name: dc1
       folder_name: backup
       folder_type: vm
