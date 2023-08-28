@@ -52,7 +52,7 @@
 #    failed_when: datastore|int < 536870912000
 
   - set_fact: 
-      datastoregb: "{{ (item / 1000000000) }}"
+      datastoregb: "{{ (item | int / 1000000000) }}"
     loop: "{{ datastore }}"
 
   - fail: msg="No free space on DS"
