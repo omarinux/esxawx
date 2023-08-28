@@ -41,6 +41,10 @@
   - set_fact: 
       memoryrequest: "90000000000"
 
+  - name: Set Storage request in GB
+    set_fact: 
+      memoryrequestgb: "{{ memoryrequest | int / 1000000000 }}"
+
   - name: Storage request GB
     debug:  
       var: "{{ memoryrequest | int / 1000000000 }}"
@@ -60,7 +64,7 @@
       var: "{{ datastoregb }}"
   
   - fail: msg="No free space on DS"
-    when: "{{ datastoregb }} < {{ memoryrequest }}"
+    when: "{{ datastoregb }} < {{ memoryrequestgb }}"
     #datastore|int < 536870912000
     # "{{ (item / 1000000000)|int }} | int > {{ memoryrequest }}"
 
