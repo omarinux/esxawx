@@ -41,6 +41,10 @@
   - set_fact: 
       memoryrequest: "9000000000"
 
+  - name: Storage request GB
+    debug:  
+      var: memoryrequest[0:2]
+      
   - debug:
       var: memoryrequest
 
