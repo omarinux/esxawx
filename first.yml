@@ -43,7 +43,7 @@
 
   - name: Storage request GB
     debug:  
-      var: "{{ (memoryrequest / 1000000000)|int }}"
+      var: "{{ memoryrequest | int / 1000000000 }}"
 
   - set_fact: 
       datastore: "{{ ds_size_list + [item.freeSpace] }}"
