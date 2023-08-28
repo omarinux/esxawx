@@ -39,7 +39,7 @@
       esxifacts: "{{ esxis.ansible_facts }}"
 
   - set_fact: 
-      memoryrequest: "81000000000"
+      memoryrequest: "79000000000"
 
   - name: Set Storage request in GB
     set_fact: 
