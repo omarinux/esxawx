@@ -93,62 +93,58 @@
       username: "{{ vcsazurigo_username }}"
       password: "{{ vcsazurigo_password }}"
       datacenter_name: dc1
-      folder_name:
-        loop:
-          - "{{ projectname }}"
-          - folder2
-          - folder3
+      folder_name: "{{ projectname }}"
       folder_type: vm
       state: present
       validate_certs: no
     register: vm_folder_creation_result
     delegate_to: localhost
     ignore_errors: true
-    when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50"
+    #when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50"
 
     # ok calcolo
     # when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50"
     
     #"{{ (esxifacts.ansible_datastore.free - memoryrequest => 50) }}"
 
-#  - name: Create a VM web on given datacenter
-#    community.vmware.vcenter_folder:
-#      hostname: '{{ vcsa_hostname }}'
-#      username: '{{ vcenter_username }}'
-#      password: '{{ vcenter_password }}'
-#      datacenter_name: dc1
-#      folder_name: web
-#      folder_type: vm
-#      state: present
-#      validate_certs: no
-#    register: vm_folder_web_creation_result
-#    delegate_to: localhost
-#    when: category is search("web")
-#
-#  - name: Create a VM dc on given datacenter
-#    community.vmware.vcenter_folder:
-#      hostname: '{{ vcsa_hostname }}'
-#      username: '{{ vcenter_username }}'
-#      password: '{{ vcenter_password }}'
-#      datacenter_name: dc1
-#      folder_name: dc
-#      folder_type: vm
-#      state: present
-#      validate_certs: no
-#    register: vm_folder_web_creation_result
-#    delegate_to: localhost
-#    when: category is search("dc")
-#
-#  - name: Create a VM backup on given datacenter
-#    community.vmware.vcenter_folder:
-#      hostname: '{{ vcsa_hostname }}'
-#      username: '{{ vcenter_username }}'
-#      password: '{{ vcenter_password }}'
-#      datacenter_name: dc1
-#      folder_name: backup
-#      folder_type: vm
-#      state: present
-#      validate_certs: no
-#    register: vm_folder_web_creation_result
-#    delegate_to: localhost
-#    when: category is search("backup")
+  - name: Create a VM web on given datacenter
+    community.vmware.vcenter_folder:
+      hostname: '{{ vcsa_hostname }}'
+      username: '{{ vcenter_username }}'
+      password: '{{ vcenter_password }}'
+      datacenter_name: dc1
+      folder_name: web
+      folder_type: vm
+      state: present
+      validate_certs: no
+    register: vm_folder_web_creation_result
+    delegate_to: localhost
+    when: category is search("web")
+
+  - name: Create a VM dc on given datacenter
+    community.vmware.vcenter_folder:
+      hostname: '{{ vcsa_hostname }}'
+      username: '{{ vcenter_username }}'
+      password: '{{ vcenter_password }}'
+      datacenter_name: dc1
+      folder_name: dc
+      folder_type: vm
+      state: present
+      validate_certs: no
+    register: vm_folder_web_creation_result
+    delegate_to: localhost
+    when: category is search("dc")
+
+  - name: Create a VM backup on given datacenter
+    community.vmware.vcenter_folder:
+      hostname: '{{ vcsa_hostname }}'
+      username: '{{ vcenter_username }}'
+      password: '{{ vcenter_password }}'
+      datacenter_name: dc1
+      folder_name: backup
+      folder_type: vm
+      state: present
+      validate_certs: no
+    register: vm_folder_web_creation_result
+    delegate_to: localhost
+    when: category is search("backup")
