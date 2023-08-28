@@ -50,7 +50,7 @@
       var: "{{ memoryrequest | int / 1000000000 }}"
 
   - set_fact: 
-      datastore: "{{ ds_size_list + [item.freeSpace] }}"
+      ds_size_list: "{{ ds_size_list + [item.freeSpace] }}"
     with_items:
       - "{{ info.datastores }}"
 #    failed_when: datastore|int < 536870912000
@@ -63,15 +63,15 @@
     debug:  
       var: "{{ max_ds }}"
 
-  - set_fact: 
-      datastoregb: "{{ (item | int / 1000000000) }}"
-    loop: "{{ datastore }}"
+  #- set_fact: 
+  #    datastoregb: "{{ (item | int / 1000000000) }}"
+  #  loop: "{{ datastore }}"
 
-  - name: Storage avaiable on DS GB
-    debug:  
-      var: "{{ datastoregb }}"
+  #- name: Storage avaiable on DS GB
+  #  debug:  
+  #    var: "{{ datastoregb }}"
 
   - fail: msg="No free space on DS"
-    when: "{{ datastoregb }} < {{ memoryrequestgb }}"
+    when: "{{ max_ds }} < {{ memoryrequestgb }}"
     #datastore|int < 536870912000
     # "{{ (item / 1000000000)|int }} | int > {{ memoryrequest }}"
