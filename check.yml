@@ -61,14 +61,15 @@
     with_items: "{{ datastore }}"
 
 
-  - set_fact: 
-      datastoregb: "{{ (item | int / 1000000000) }}"
-    loop: "{{ datastore }}"
+  #- set_fact: 
+  #    datastoregb: "{{ (item | int / 1000000000) }}"
+  #  loop: "{{ datastore }}"
 
   - name: Storage avaiable on DS GB
     debug:  
       var: "{{ item }}"
-    loop: "{{ datastoregb }}"
+    with_items: "{{ datastoregb }}"
+    #loop: "{{ datastoregb }}"
 
   - name: Pick DS max free space
     set_fact:
