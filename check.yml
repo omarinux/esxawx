@@ -56,6 +56,12 @@
     when: (storagetype == "HDD") and (item.name is regex(".*datastore[1-9].*"))
 #    failed_when: datastore|int < 536870912000
 
+  - set_fact: 
+      ds_size_list: "{{ ds_size_list + [item.freeSpace] }}"
+    with_items:
+      - "{{ info.datastores }}"
+    when: (storagetype == "SSD") and (item.name is regex(".*DS-LUN-SSD-[1-9].*"))
+
   - name: Pick Storage max avail
     set_fact:    # find the value of the largest freeSpace entry in the ds_size_list list
       max_ds: "{{ ds_size_list | max }}"
