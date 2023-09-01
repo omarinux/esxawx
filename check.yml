@@ -38,6 +38,9 @@
   - set_fact: 
       esxifacts: "{{ esxis.ansible_facts }}"
 
+  - set_fact:
+      memorytemp: "{{ (memoryrequest * ninstances) }}"
+
   - set_fact: 
       memoryrequest: "81000000000"
 
@@ -76,7 +79,7 @@
   #  debug:  
   #    var: "{{ datastoregb }}"
 
-  - fail: msg="No free space on DS HDD"
+  - fail: msg="No free space on DS"
     when: "{{ datastoregb }} < {{ memoryrequestgb }}"
     #datastore|int < 536870912000
     # "{{ (item / 1000000000)|int }} | int > {{ memoryrequest }}"
