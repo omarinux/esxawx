@@ -42,7 +42,7 @@
       memorytemp: "{{ (storagerequest * ninstances) }}"
 
   - set_fact: 
-      memoryrequest: "{{ memorytemp + "000000000" }}"
+      memoryrequest: "{{ memorytemp | int * 1000000000 }}"
       #"81000000000"
 
   - name: Set Storage request in GB
