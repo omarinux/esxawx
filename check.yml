@@ -39,7 +39,7 @@
       esxifacts: "{{ esxis.ansible_facts }}"
 
   - set_fact:
-      memorytemp: "{{ (memoryrequest * ninstances) }}"
+      memorytemp: "{{ (storagerequest * ninstances) }}"
 
   - set_fact: 
       memoryrequest: "81000000000"
