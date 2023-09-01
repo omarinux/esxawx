@@ -5,7 +5,7 @@
   gather_facts: yes
   tasks:
 
-  - name: Show Host
+  - name: Show Vcenter User
     debug:
       msg: "{{ vcsazurigo_username }}"
     ignore_errors: true
