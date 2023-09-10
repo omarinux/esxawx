@@ -125,6 +125,8 @@
     delegate_to: localhost
     ignore_errors: true
     loop: "{{ projectname.split('\n') }}"
+    async: 60
+    poll: 10
     #when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50"
 
     # ok calcolo
