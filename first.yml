@@ -102,7 +102,14 @@
   - debug:
       msg: "Free Memory available on {{esxifacts.ansible_hostname }} = {{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }}%"
 
-
+  - name: debug project name as a folders
+    debug:
+      var: projectname
+ 
+  - name: run it as a list
+    debug:
+      msg: "Will be make folder {{ item }}"
+    loop: "{{ projectname.split('\n') }}"
 
   - name: Create a VM folder on given datacenter
     community.vmware.vcenter_folder:
@@ -110,13 +117,14 @@
       username: "{{ vcsazurigo_username }}"
       password: "{{ vcsazurigo_password }}"
       datacenter_name: dc1
-      folder_name: "{{ projectname }}"
+      folder_name: "{{ item }}"
       folder_type: vm
       state: present
       validate_certs: no
     register: vm_folder_creation_result
     delegate_to: localhost
     ignore_errors: true
+    loop: "{{ projectname.split('\n') }}"
     #when: "{{ (esxifacts.ansible_memfree_mb * 100 / esxifacts.ansible_memtotal_mb)|int }} | int > 50"
 
     # ok calcolo
